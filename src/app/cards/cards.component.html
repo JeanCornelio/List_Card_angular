@@ -1,0 +1,58 @@
+
+<form>
+    <div class="input-group input-group-lg w-25 ms-5 mb-5 mt-5">
+        <span class="input-group-text" >🔍</span>
+        <input type="text" class="form-control" placeholder="Buscador por nombres..."  (keyup)="filter()" name="filter" [(ngModel)]="filtradoInput">
+        <button class="btn btn-success" data-bs-target="#addTarjet" data-bs-toggle="modal" data-bs-dismiss="modal">Nueva Tarjeta</button>
+      </div>
+      
+</form>
+
+
+<div class="d-flex flex-wrap justify-content-evenly">
+    <app-cards-template
+    *ngFor="let perfil of perfilesCopy"
+    [id]="perfil.id"
+    [image_avatar]="perfil.image_avatar"
+    [first_name]="perfil.first_name"
+    [last_name]="perfil.last_name"
+    [job]="perfil.job"
+    [street_addres]="perfil.street_addres"
+
+    (idperfil)="deleteCard($event)"
+    >
+    </app-cards-template>
+</div>
+
+<div class="modal fade" id="addTarjet" aria-hidden="true" aria-labelledby="addTarjet" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-dark text-white">
+          <h5 class="modal-title " id="addTarjet">Agregar Tarjeta</h5>
+          <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                  <label  class="form-label">Nombres*</label>
+                  <input type="text" class="form-control" name="first_name" [(ngModel)]="first_name" required >
+                </div>
+                <div class="mb-3">
+                    <label  class="form-label">Apellidos*</label>
+                    <input type="text" class="form-control" name="last_name" [(ngModel)]="last_name" required>
+                  </div>
+                  <div class="mb-3">
+                    <label  class="form-label">Profesión*</label>
+                    <input type="text" class="form-control" name="job" [(ngModel)]="job" required>
+                  </div>
+                  <div class="mb-3">
+                    <label  class="form-label">Dirección*</label>
+                    <input type="text" class="form-control" name="street_addres" [(ngModel)]="street_addres" required>
+                  </div>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!first_name || !last_name || !job || !street_addres" (click)="addTarjet() ">Agregar</button>
+             
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>

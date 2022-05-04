@@ -1,0 +1,13 @@
+html{
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.card{
+
+    background: linear-gradient(#251D3A 100px, #251D3A 115px, rgba(245,248,250,8) 12px) !important;
+}
+
+.imgProg{
+    max-height: 150px;
+    max-width: 150px;
+}
