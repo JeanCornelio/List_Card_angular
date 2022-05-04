@@ -134,6 +134,10 @@ footer{
   border: none;
   animation-duration: 1s;
   animation-name: my-animations;
+  border-radius: 15px !important;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow:  34px 34px 68px #969696,
+               -34px -34px 68px #ffffff !important;
 }
 
 @keyframes my-animations {
@@ -151,4 +155,12 @@ footer{
       transform: translateY(0%);
       opacity: 100;
   }
+}
+.card-toolbar{
+  align-items: center;
+}
+
+.img-grid{
+height: 5rem;
+width: 5rem;
 }

@@ -1,34 +1,67 @@
 
 <form>
-    <div class="input-group input-group-lg w-25 ms-5 mb-5 mt-5">
-        <span class="input-group-text" >🔍</span>
-        <input type="text" class="form-control" placeholder="Buscador por nombres..."  (keyup)="filter()" name="filter" [(ngModel)]="filtradoInput">
-        <button class="btn btn-success" data-bs-target="#addTarjet" data-bs-toggle="modal" data-bs-dismiss="modal">Nueva Tarjeta</button>
-      </div>
-      
+  <div class="card-toolbar d-flex">
+    <div class="input-group input-group-lg w-25 ms-5 mb-5 mt-5 me-5">
+      <span class="input-group-text" >🔍</span>
+      <input type="text" class="form-control" placeholder="Buscador por nombres..."  (keyup)="filter()" name="filter" [(ngModel)]="filtradoInput">
+      <button class="btn btn-success" data-bs-target="#addTarjet" data-bs-toggle="modal" data-bs-dismiss="modal">Nuevo Perfil</button>
+    </div>
+    <button class="btn btn-secondary" (click)="changeType()">{{ dataShow =="gridType" ? "Modo Card":"Modo Grid"}}</button>
+  </div>      
 </form>
 
+<div class="container-fluid" *ngIf="dataShow == 'gridType'; else cardType" >
 
-<div class="d-flex flex-wrap justify-content-evenly">
+<table class="table">
+<thead>
+    <tr>
+      <th>No.</th>
+      <th>id</th>
+      <th class="text-center">Imagen</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Profesión</th>
+      <th>Dirección</th>
+      <th>Acción</th>
+    </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let perfil of perfilesCopy; let i = index">
+    <td class="align-middle">{{i+1}}</td>
+    <td class="align-middle">{{perfil.id}}</td>
+    <td class="text-center"><img class="rounded-circle img-grid" src="{{perfil.image_avatar}}"></td>
+    <td  class="align-middle">{{perfil.first_name}}</td>
+    <td  class="align-middle">{{perfil.last_name}}</td>
+    <td  class="align-middle">{{perfil.job}}</td>
+    <td  class="align-middle">{{perfil.street_addres}}</td>
+    <td  class="align-middle">
+      <button class="btn btn-danger" (click)="deleteCardGrid(i)">Delete</button>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<ng-template #cardType>
+  <div class="d-flex flex-wrap justify-content-evenly">
     <app-cards-template
-    *ngFor="let perfil of perfilesCopy"
+    *ngFor="let perfil of perfilesCopy let i = index"
     [id]="perfil.id"
     [image_avatar]="perfil.image_avatar"
     [first_name]="perfil.first_name"
     [last_name]="perfil.last_name"
     [job]="perfil.job"
     [street_addres]="perfil.street_addres"
-
     (idperfil)="deleteCard($event)"
     >
     </app-cards-template>
-</div>
+  </div>
+</ng-template>
 
 <div class="modal fade" id="addTarjet" aria-hidden="true" aria-labelledby="addTarjet" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title " id="addTarjet">Agregar Tarjeta</h5>
+          <h5 class="modal-title " id="addTarjet">Agregar Perfil</h5>
           <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -50,7 +83,6 @@
                     <input type="text" class="form-control" name="street_addres" [(ngModel)]="street_addres" required>
                   </div>
                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!first_name || !last_name || !job || !street_addres" (click)="addTarjet() ">Agregar</button>
-             
               </form>
         </div>
       </div>

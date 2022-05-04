@@ -6,7 +6,7 @@ import { Perfiles } from './perfiles.models';
   styleUrls: ['./cards.component.css']
 })
 export class CardsComponent implements OnInit {
-  mensaje="No obtuvo resultados"
+  dataShow="gridType"
   first_name=""
   last_name=""
   job=""
@@ -46,7 +46,8 @@ export class CardsComponent implements OnInit {
 
   addTarjet(){
         let image = "https://i.pravatar.cc/150?img="+Number(this.perfilesCopy.length + 1);
-        let card = new Perfiles(this.perfilesCopy[this.perfilesCopy.length -1].id+1,image,this.first_name,this.last_name,this.job,this.street_addres)
+        let card = new Perfiles(this.perfilesCopy[this.perfilesCopy.length -1]?.id+1,image,this.first_name,this.last_name,this.job,this.street_addres)
+        console.log(this.perfilesCopy)
         this.perfilesCopy.push(card)
         this.first_name = ""
         this.last_name= ""
@@ -58,7 +59,7 @@ export class CardsComponent implements OnInit {
   if(!this.filtradoInput){
       this.perfilesCopy = this.perfiles
   }else{
-     this.perfilesCopy = this.perfilesCopy.filter( (perfilesCopy:any) => perfilesCopy.first_name.toLocaleLowerCase().includes(this.filtradoInput.toLocaleLowerCase()))   
+     this.perfilesCopy = this.perfiles.filter( (perfilesCopy:any) => perfilesCopy.first_name.toLocaleLowerCase().includes(this.filtradoInput.toLocaleLowerCase()))   
         }
   }
 
@@ -70,6 +71,26 @@ export class CardsComponent implements OnInit {
       this.perfiles.splice(index, 1)
     }
   }
+  deleteCardGrid(i:number){
+  console.log(i)
 
+    let index = i 
+      console.log(index)
+      if(index != -1){
+        this.perfilesCopy.splice(index, 1)
+        this.perfiles.splice(index, 1)
+      }
+    }
+
+    changeType(){
+      if(this.dataShow == "gridType"){
+        this.dataShow = "cardType"
+      }else{
+        this.dataShow = "gridType"
+      }
+    }
+
+
+  
 
 }
