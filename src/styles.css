@@ -135,9 +135,9 @@ footer{
   animation-duration: 1s;
   animation-name: my-animations;
   border-radius: 15px !important;
-  background: linear-gradient(145deg, #e6e6e6, #ffffff);
-  box-shadow:  34px 34px 68px #969696,
-               -34px -34px 68px #ffffff !important;
+  background: linear-gradient(145deg, #807f7f, #ffffff);
+  box-shadow:  34px 34px 68px #96969600,
+               -34px -34px 68px #7474748a !important;
 }
 
 @keyframes my-animations {

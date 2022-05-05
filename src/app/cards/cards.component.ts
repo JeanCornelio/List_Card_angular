@@ -46,13 +46,25 @@ export class CardsComponent implements OnInit {
 
   addTarjet(){
         let image = "https://i.pravatar.cc/150?img="+Number(this.perfilesCopy.length + 1);
-        let card = new Perfiles(this.perfilesCopy[this.perfilesCopy.length -1]?.id+1,image,this.first_name,this.last_name,this.job,this.street_addres)
-        console.log(this.perfilesCopy)
-        this.perfilesCopy.push(card)
-        this.first_name = ""
-        this.last_name= ""
-        this.job =""
-        this.street_addres=""
+        if(this.perfilesCopy.length == 0){
+          let card = new Perfiles(1,image,this.first_name,this.last_name,this.job,this.street_addres)
+          console.log(this.perfilesCopy)
+          this.perfilesCopy.push(card)
+          this.first_name = ""
+          this.last_name= ""
+          this.job =""
+          this.street_addres=""
+        }else{
+          let card = new Perfiles(this.perfilesCopy[this.perfilesCopy.length -1]?.id+1,image,this.first_name,this.last_name,this.job,this.street_addres)
+          console.log(this.perfilesCopy)
+          this.perfilesCopy.push(card)
+          this.first_name = ""
+          this.last_name= ""
+          this.job =""
+          this.street_addres=""
+        }
+
+        
   }
 
   filter(){

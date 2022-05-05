@@ -1,18 +1,18 @@
 
 <form>
-  <div class="card-toolbar d-flex">
-    <div class="input-group input-group-lg w-25 ms-5 mb-5 mt-5 me-5">
+  <div class="card-toolbar d-flex justify-content-between">
+    <div class="input-group input-group-lg w-25 ms-4 mb-5 mt-5 me-5">
       <span class="input-group-text" >🔍</span>
       <input type="text" class="form-control" placeholder="Buscador por nombres..."  (keyup)="filter()" name="filter" [(ngModel)]="filtradoInput">
       <button class="btn btn-success" data-bs-target="#addTarjet" data-bs-toggle="modal" data-bs-dismiss="modal">Nuevo Perfil</button>
     </div>
-    <button class="btn btn-secondary" (click)="changeType()">{{ dataShow =="gridType" ? "Modo Card":"Modo Grid"}}</button>
+    <button class="btn btn-dark btn-lg float-end me-5" (click)="changeType()"> {{ dataShow =="gridType" ? "📇 Modo Card":"📃 Modo Grid"}}</button>
   </div>      
 </form>
 
 <div class="container-fluid" *ngIf="dataShow == 'gridType'; else cardType" >
 
-<table class="table">
+<table class="table table-hover ">
 <thead>
     <tr>
       <th>No.</th>
@@ -22,7 +22,7 @@
       <th>Apellido</th>
       <th>Profesión</th>
       <th>Dirección</th>
-      <th>Acción</th>
+      <th class="text-center">Acción</th>
     </tr>
 </thead>
 <tbody>
@@ -34,15 +34,16 @@
     <td  class="align-middle">{{perfil.last_name}}</td>
     <td  class="align-middle">{{perfil.job}}</td>
     <td  class="align-middle">{{perfil.street_addres}}</td>
-    <td  class="align-middle">
-      <button class="btn btn-danger" (click)="deleteCardGrid(i)">Delete</button>
+    <td  class="align-middle text-center">
+      <button class="btn btn-danger" (click)="deleteCardGrid(i)">🗑️ Eliminar</button>
     </td>
   </tr>
 </tbody>
 </table>
 </div>
+
 <ng-template #cardType>
-  <div class="d-flex flex-wrap justify-content-evenly">
+  <div class="d-flex flex-wrap justify-content-around container-fluid  ">
     <app-cards-template
     *ngFor="let perfil of perfilesCopy let i = index"
     [id]="perfil.id"
